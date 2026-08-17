@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+wheels/
+*.egg-info/
+.eggs/
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 密钥与本地连接信息（不要提交）
+.env
+.env.*
+!.env.example
+config.py
+
+# IDE / 编辑器
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 测试 / 类型检查缓存
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# RAG / 向量库 / 本地数据库运行时产物
+LangChain-RAG/query_log.json
+chroma/
+chroma_db/
+.chroma/
+*.faiss
+*.index
+milvus.db
+*.sqlite
+*.sqlite3
+
+# 本地下载的模型权重（体积大，可重新拉取）
+*.safetensors
+*.bin
+*.onnx
+*.pt
+*.pth
