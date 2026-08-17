@@ -39,15 +39,15 @@ def main() -> None:
     print_stage("按节点打印 updates")
     # 官方文档：updates = 每个图节点跑完后的状态增量，不是 token。
     # 一次工具调用通常看到：model（带 tool_calls）→ tools（ToolMessage）→ model（最终文本）。
-    # 源码分析：version="v2" 时无论订几种 mode，chunk 都是 StreamPart：type / ns / knowledge_docs。
-    # 不传 version 默认 v1，可能是 (mode, knowledge_docs) 元组，按 chunk["type"] 去读会对不上。
+    # 源码分析：version="v2" 时无论订几种 mode，chunk 都是 StreamPart：type / ns / data。
+    # 不传 version 默认 v1，可能是 (mode, data) 元组，按 chunk["type"] 去读会对不上。
     # 和 messages 的区别：updates 按步骤，适合进度条/调试节点；messages 才是打字机。
     for chunk in agent.stream(
         {"messages": [{"role": "user", "content": "贵阳现在天气如何？"}]},
         stream_mode="updates",
         version="v2",
     ):
-        payload = chunk["knowledge_docs"] if isinstance(chunk, dict) and "knowledge_docs" in chunk else chunk
+        payload = chunk["data"] if isinstance(chunk, dict) and "data" in chunk else chunk
         print("chunk type:", type(chunk).__name__, list(payload) if isinstance(payload, dict) else payload)
         if isinstance(payload, dict):
             for node, update in payload.items():

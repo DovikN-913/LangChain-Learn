@@ -39,8 +39,8 @@ def main() -> None:
 
     print_stage("流式 token / tool_call_chunk")
     # 官方文档：messages 产出 (token, metadata)；metadata 带 langgraph_node。
-    # 源码分析：v2 信封是 {"type": "messages", "ns": ..., "knowledge_docs": (token, metadata)}。
-    # 先认 type 再解包 knowledge_docs，不要把整个 chunk 当元组。
+    # 源码分析：v2 信封是 {"type": "messages", "ns": ..., "data": (token, metadata)}。
+    # 先认 type 再解包 data，不要把整个 chunk 当元组。
     # 和 updates 的区别：这里是生成过程中的增量；updates 要等整个节点跑完。
     # 和 Event streaming 的区别：这里自己拆信封；v3 用 stream.messages 投影。
     for chunk in agent.stream(
@@ -50,7 +50,7 @@ def main() -> None:
     ):
         if not isinstance(chunk, dict) or chunk.get("type") != "messages":
             continue
-        token, metadata = chunk["knowledge_docs"]
+        token, metadata = chunk["data"]
         node = metadata.get("langgraph_node")
         if isinstance(token, AIMessageChunk):
             if token.content:

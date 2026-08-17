@@ -34,7 +34,7 @@ def main() -> None:
 
     print_stage("区别")
     print(
-        "Streaming 返回按模式分类的 chunk，要自己判断 type/knowledge_docs。\n"
+        "Streaming 返回按模式分类的 chunk，要自己判断 type/data。\n"
         "Event streaming 给出 stream.messages / tool_calls / values / output。\n"
         "异步场景下投影还能 asyncio.gather 并行消费。"
     )

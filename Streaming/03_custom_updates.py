@@ -46,14 +46,14 @@ def main() -> None:
 
     print_stage("同时看节点更新和自定义进度")
     # 官方文档：stream_mode 可传 list，同时订多种模式。
-    # 源码分析：v2 每个 chunk 是 {type, ns, knowledge_docs}，用 chunk["type"] 区分，不必解包 (mode, knowledge_docs)。
+    # 源码分析：v2 每个 chunk 是 {type, ns, data}，用 chunk["type"] 区分，不必解包 (mode, data)。
     for chunk in agent.stream(
         {"messages": [{"role": "user", "content": "查一下贵阳天气"}]},
         stream_mode=["updates", "custom"],
         version="v2",
     ):
         kind = chunk.get("type") if isinstance(chunk, dict) else None
-        data = chunk.get("knowledge_docs") if isinstance(chunk, dict) else chunk
+        data = chunk.get("data") if isinstance(chunk, dict) else chunk
         if kind == "custom":
             print("[custom]", data)
         elif kind == "updates":

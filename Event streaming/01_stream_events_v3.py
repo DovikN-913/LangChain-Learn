@@ -46,7 +46,7 @@ def main() -> None:
         version="v3",
     )
     # stream.messages：每次 LLM 调用一条消息流。message.content 是文本增量。
-    # 和 Streaming 的 stream_mode="messages" 比：这里不用拆 type/knowledge_docs 信封。
+    # 和 Streaming 的 stream_mode="messages" 比：这里不用拆 type/data 信封。
     for message in stream.messages:
         node = getattr(message, "node", "?")
         print(f"\n[{node}] ", end="")

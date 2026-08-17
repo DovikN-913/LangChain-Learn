@@ -25,7 +25,7 @@ from utils import print_stage
 def main() -> None:
     print_stage("是什么")
     # 官方文档：三种模式可单独订，也可 list 同时订。底层都是 Pregel.stream。
-    # 源码分析：version="v2" 统一成 StreamPart（type/ns/knowledge_docs）；默认 v1 可能是元组。
+    # 源码分析：version="v2" 统一成 StreamPart（type/ns/data）；默认 v1 可能是元组。
     print(
         "updates：每个图节点跑完后的状态增量。\n"
         "messages：模型生成过程中的 token 与 metadata。\n"
